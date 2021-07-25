@@ -1,4 +1,3 @@
-// ここから書いてください。
 class Products {
     constructor(name, price, picUrl) {
         this.name = name;
@@ -123,17 +122,17 @@ class Display {
 
 
 const products = [
-    new Products("Chips", 4, "https://images.unsplash.com/photo-1518013431117-eb1465fa5752?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"),
-    new Products("Hotdog", 12, "https://images.unsplash.com/photo-1566626106394-c123b6af51ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"),
-    new Products("Chocolate", 22, "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2689&q=80"),
-    new Products("Ice cream", 14, "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"),
-    new Products("Fried Chicken", 10, "https://images.unsplash.com/photo-1594254916028-742dedb72062?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"),
-    new Products("Dim Sum", 16, "https://images.unsplash.com/photo-1518983546435-91f8b87fe561?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"),
-    new Products("Sandwich", 8, "https://images.unsplash.com/photo-1509722747041-616f39b57569?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"),
-    new Products("Cookies", 12, "https://images.unsplash.com/photo-1548365328-8c6db3220e4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"),
-    new Products("Candy", 5, "https://images.unsplash.com/photo-1599929219210-7c422e4d5208?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nzh8fGNhbmR5fGVufDB8fDB8&auto=format&fit=crop&w=800&q=60"),
+    new Products("Chips", 4, "./pics/potato.jpeg"),
+    new Products("Hotdog", 12, "./pics/hotdog.jpeg"),
+    new Products("Chocolate", 22, "./pics/chocolate.jpeg"),
+    new Products("Ice cream", 14, "./pics/ice.jpeg"),
+    new Products("Fried Chicken", 10, "./pics/friedChicken.jpeg"),
+    new Products("Dim Sum", 16, "./pics/dimSam.jpeg"),
+    new Products("Sandwich", 8, "./pics/sandwich.jpeg"),
+    new Products("Cookies", 12, "./pics/cookies.jpeg"),
+    new Products("Candy", 5, "./pics/candy.jpeg"),
 ];
-const defaultPic = new Products("", 0, "https://images.pexels.com/photos/3184180/pexels-photo-3184180.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+const defaultPic = new Products("", 0, "./pics/default.jpeg");
 
 let picArr = [];
 for (let i = 0; i < products.length; i++) {
