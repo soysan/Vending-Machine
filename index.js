@@ -15,7 +15,7 @@ class Display {
         for (let i = 0; i < products.length; i++) {
             let button =
                 `
-            <button type="button" class="btn btn-primary m-1 col-3 choseItems">
+            <button id=${"btn" + i+1} type="button" class="btn btn-primary m-1 col-3 choseItems">
                 <h3>${i + 1}</h3>
             </button>
             `;
@@ -44,6 +44,8 @@ class Display {
                     </div>
                 </div>
                 `;
+
+                // main pic change
             });
         }
     }
@@ -69,7 +71,7 @@ class Display {
             sliders.append(extra);
             imgItem.append(sliders);
 
-            main.setAttribute("data-index", "0");
+            main.setAttribute("data-index", String(pickedNum));
 
             Display.slideJump(main, extra);
         } else {
@@ -80,8 +82,8 @@ class Display {
     }
 
     static slideJump = (main, extra) => {
-        let index = parseInt(main.getAttribute("data-index"));
-        let currentPic = picArr[index];
+        const index = parseInt(main.getAttribute("data-index"));
+        const currentPic = picArr[index];
 
         let pickedIndex = parseInt(document.getElementById("picked").innerText) - 1;
         if (index > pickedIndex) {
@@ -93,7 +95,7 @@ class Display {
         }
 
         let nextPic = picArr[index];
-        main.setAttribute("data-index", index.toString());
+        main.setAttribute("data-index", String(index));
 
         Display.animation(currentPic, nextPic, main, extra);
     }
@@ -139,8 +141,10 @@ for (let i = 0; i < products.length; i++) {
     picArr.push(products[i].picUrl);
 }
 // default
-document.getElementById("imgItem").innerHTML = `<img class="full-width" src="${defaultPic.picUrl}">`;
+document.getElementById("imgItem").innerHTML = `<img class="full-width" src=${defaultPic.picUrl}>`;
 document.getElementById("buttons").innerHTML = Display.setButtons();
 Display.showProductInfo();
-
+for (let i = 0; i < products.length; i++){
+    document.querySelector(`#btn${i+1}`).addEventListener("change", Display.sliderShow)
+}
 document.getElementById("pushBtn").addEventListener("click", Display.sliderShow)
