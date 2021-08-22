@@ -6,10 +6,10 @@ from [Recursion](https://recursionist.io/)
 商品画像が商品番号を変えるたびにスライドして選択した商品を表示する。
 
 # URL
-[Vending Machine]()
+[Vending Machine](https://soysan.github.io/Vending-Machine/)
 
 # Demo
-![demo]()
+![demo](pics/demo.gif)
 
 # Requirement
 Bootstrap4.5の動くブラウザ
