@@ -15,7 +15,7 @@ class Display {
         for (let i = 0; i < products.length; i++) {
             let button =
                 `
-            <button id=${"btn" + i+1} type="button" class="btn btn-primary m-1 col-3 choseItems">
+            <button id=${"btn" + (i + 1)} type="button" class="btn btn-primary m-1 col-3 choseItems">
                 <h3>${i + 1}</h3>
             </button>
             `;
@@ -44,8 +44,6 @@ class Display {
                     </div>
                 </div>
                 `;
-
-                // main pic change
             });
         }
     }
@@ -54,7 +52,8 @@ class Display {
         const imgItem = document.getElementById("imgItem");
 
         //default
-        if (imgItem.childNodes[0].src === defaultPic.picUrl) {
+        if (imgItem.getAttribute('default') === 'default') {
+            imgItem.removeAttribute('default');
             imgItem.childNodes[0].remove();
 
             let sliders = document.createElement("div");
@@ -64,7 +63,7 @@ class Display {
             main.classList.add("full-width", "main");
             extra.classList.add("full-width", "extra");
 
-            let pickedNum = parseInt(document.getElementById("picked").innerText) - 1;
+            let pickedNum = parseInt(document.querySelector("#picked").innerText) - 1;
             main.src = picArr[pickedNum];
 
             sliders.append(main);
@@ -72,7 +71,6 @@ class Display {
             imgItem.append(sliders);
 
             main.setAttribute("data-index", String(pickedNum));
-
             Display.slideJump(main, extra);
         } else {
             let main = document.querySelector(".main");
@@ -85,23 +83,16 @@ class Display {
         const index = parseInt(main.getAttribute("data-index"));
         const currentPic = picArr[index];
 
-        let pickedIndex = parseInt(document.getElementById("picked").innerText) - 1;
-        if (index > pickedIndex) {
-            index = index - (index - pickedIndex);
-            if (index < 0) index = picArr.length - 1 + index;
-        } else {
-            index = index + pickedIndex - index;
-            if (index > picArr.length - 1) index = 0 + index;
-        }
+        let pickedIndex = parseInt(document.querySelector("#picked").innerText) - 1;
 
-        let nextPic = picArr[index];
-        main.setAttribute("data-index", String(index));
+        let nextPic = picArr[pickedIndex];
+        main.setAttribute("data-index", String(pickedIndex));
 
         Display.animation(currentPic, nextPic, main, extra);
     }
 
     static animation = (currentPic, nextPic, main, extra) => {
-        let sliders = document.getElementById("imgItem")
+        let sliders = document.getElementById("imgItem");
         main.innerHTML = "";
         main.src = nextPic;
 
@@ -110,14 +101,17 @@ class Display {
         main.classList.add("expand-animation");
         extra.classList.add("deplete-animation");
 
-        if (picArr[nextPic] > picArr[currentPic]) {
+        const nextIndex = picArr.indexOf(nextPic);
+        const currIndex = picArr.indexOf(currentPic);
+
+        if (nextIndex > currIndex) {
             sliders.innerHTML = "";
-            sliders.append(main);
             sliders.append(extra);
+            sliders.append(main);
         } else {
             sliders.innerHTML = "";
-            sliders.append(extra);
             sliders.append(main);
+            sliders.append(extra);
         }
     }
 }
@@ -140,11 +134,17 @@ let picArr = [];
 for (let i = 0; i < products.length; i++) {
     picArr.push(products[i].picUrl);
 }
+
 // default
 document.getElementById("imgItem").innerHTML = `<img class="full-width" src=${defaultPic.picUrl}>`;
+
 document.getElementById("buttons").innerHTML = Display.setButtons();
 Display.showProductInfo();
-for (let i = 0; i < products.length; i++){
-    document.querySelector(`#btn${i+1}`).addEventListener("change", Display.sliderShow)
+
+for (let i = 0; i < products.length; i++) {
+    document.querySelector(`#btn${(i + 1)}`).addEventListener("click", Display.sliderShow)
 }
-document.getElementById("pushBtn").addEventListener("click", Display.sliderShow)
+document.getElementById("pushBtn").addEventListener("click", () => {
+    const index = parseInt(document.querySelector('#picked').innerText) - 1;
+    alert(`Thank you for buying ${products[index].name}`)
+})
